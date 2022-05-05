@@ -8,9 +8,10 @@ END CalculatorProject;
 
 
 ARCHITECTURE Logic OF CalculatorProject IS
-	SIGNAL number
+	SIGNAL number : BIT_VECTOR (1 DOWNTO 0);
 	BEGIN
 	PROCESS (digit1, digit2, LED_out)
-		
+	BEGIN
+		number <= digit1 digit2;
 	END PROCESS;
 END Logic;
