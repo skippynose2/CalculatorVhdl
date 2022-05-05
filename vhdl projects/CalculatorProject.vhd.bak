@@ -1,0 +1,7 @@
+ENTITY KeyBoard IS
+PORT (
+	digit1 : IN BIT_VECTOR (2 DOWNTO 0);
+	digit2 : IN BIT_VECTOR (2 DOWNTO 0);
+	LED_out : OUT BIT_VECTOR (6 DOWNTO 0));
+
+END KeyBoard;
