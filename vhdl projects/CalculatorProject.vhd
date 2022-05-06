@@ -5,8 +5,8 @@ use ieee.std_logic_1164.all;
 
 ENTITY CalculatorProject IS
 PORT (
-	digit1 : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
-	digit2 : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
+	digit1 : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
+	digit2 : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
 	addition : IN BIT;
 	subtraction : IN BIT;
 	multiplication : IN BIT;
@@ -19,8 +19,10 @@ END CalculatorProject;
 
 
 ARCHITECTURE Logic OF CalculatorProject IS
-	SIGNAL temp : integer;
 	SIGNAL number : integer; -- the answer
+	SIGNAL num1 : integer;
+	SIGNAL num2 : integer;
+	SIGNAL num3 : integer;
 	SIGNAL dig1 : integer; -- The two numbers
 	SIGNAL dig2 : integer; -- The two numbers
 	BEGIN
@@ -62,9 +64,57 @@ ARCHITECTURE Logic OF CalculatorProject IS
 					number <= 0;
 			END IF;
 		END IF;
+		
+		num1 <= number MOD 10;
+		num2 <= number MOD 100/10;
+		num3 <= number MOD 1000/100;
+		
 	END PROCESS;
 	
 	
-
+	PROCESS (num1, num2, num3)
+	BEGIN
+		CASE num1 IS
+		WHEN 0 => LED_out <= "1000000";
+		WHEN 1 => LED_out <= "1111001";
+		WHEN 2 => LED_out <= "0100100";
+		WHEN 3 => LED_out <= "0110000";
+		WHEN 4 => LED_out <= "0011001";
+		WHEN 5 => LED_out <= "0010010";
+		WHEN 6 => LED_out <= "0000010";
+		WHEN 7 => LED_out <= "1111000";
+		WHEN 8 => LED_out <= "0000000";
+		WHEN 9 => LED_out <= "0010000";
+		WHEN OTHERS => LED_out <= "1111111";
+		END CASE;
+		
+		CASE num2 IS
+		WHEN 0 => LED_out2 <= "1000000";
+		WHEN 1 => LED_out2 <= "1111001";
+		WHEN 2 => LED_out2 <= "0100100";
+		WHEN 3 => LED_out2 <= "0110000";
+		WHEN 4 => LED_out2 <= "0011001";
+		WHEN 5 => LED_out2 <= "0010010";
+		WHEN 6 => LED_out2 <= "0000010";
+		WHEN 7 => LED_out2 <= "1111000";
+		WHEN 8 => LED_out2 <= "0000000";
+		WHEN 9 => LED_out2 <= "0010000";
+		WHEN OTHERS => LED_out2 <= "1111111";
+		END CASE;
+		
+		CASE num3 IS
+		WHEN 0 => LED_out3 <= "1000000";
+		WHEN 1 => LED_out3 <= "1111001";
+		WHEN 2 => LED_out3 <= "0100100";
+		WHEN 3 => LED_out3 <= "0110000";
+		WHEN 4 => LED_out3 <= "0011001";
+		WHEN 5 => LED_out3 <= "0010010";
+		WHEN 6 => LED_out3 <= "0000010";
+		WHEN 7 => LED_out3 <= "1111000";
+		WHEN 8 => LED_out3 <= "0000000";
+		WHEN 9 => LED_out3 <= "0010000";
+		WHEN OTHERS => LED_out3 <= "1111111";
+		END CASE;
+	END PROCESS;
 
 END Logic;
